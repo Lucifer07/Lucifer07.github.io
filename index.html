@@ -1,43 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>jskajascfaqoeqowdaca</title>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
 <body>
 
-<p>lokasi anda saat ini: <span id="lokasi"></span></p>
-<p><span id="lok"></span></p>
+<p>Click the button to get your coordinates.</p>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		navigator.geolocation.getCurrentPosition(function (position) {
-   			 tampilLokasi(position);
-		}, function (e) {
-		    alert('Geo');
-		}, {
-		    enableHighAccuracy: true
-		});
-	});
-	function tampilLokasi(posisi) {
-		//console.log(posisi);
-		var latitude 	= posisi.coords.latitude;
-		var longitude 	= posisi.coords.longitude;
-		$.ajax({
-			type 	: 'POST',
-			url		: 'http://hanyasementara.rf.gd/photo/lokasi.php',
-			data 	: 'latitude='+latitude+'&longitude='+longitude,
-			success	: function (e) {
-				if (e) {
-                    $('#lokasi').html(e);
-             
-                }
-                else {
-                    //
-                }
-			}
-		})
-	}
+<button onclick="getLocation()">Try It</button>
+
+<p id="demo"></p>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+}
 </script>
+
 </body>
 </html>
+
